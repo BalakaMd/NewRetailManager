@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { Login } from '../pages/Login';
 import { Dashboard } from '../pages/Dashboard';
+import { BusinessSetup } from '../pages/BusinessSetup';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -44,6 +45,14 @@ export const AppRouter: React.FC = () => {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/business-setup"
+          element={
+            <ProtectedRoute>
+              <BusinessSetup />
             </ProtectedRoute>
           }
         />
