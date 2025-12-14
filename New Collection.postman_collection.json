@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "577decdf-3102-4de2-858d-bf85b08e7312",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50289484",
+		"_collection_link": "https://dmytro-balakin-4423454.postman.co/workspace/Dmytro-Balakin's-Workspace~35d819b1-ee9a-481f-8148-d155de593ad8/collection/50289484-577decdf-3102-4de2-858d-bf85b08e7312?action=share&source=collection_link&creator=50289484"
+	},
+	"item": [
+		{
+			"name": "OnBoarding Operations",
+			"item": [
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"OldTerminalPassword\": \"{{Password}}\",\n  \"TerminalPassword\": \"NewPassword123\",\n  \"TerminalUserName\": \"terminal_username\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/OnBoarding/API/ChangePassword",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"OnBoarding",
+								"API",
+								"ChangePassword"
+							]
+						},
+						"description": "API to set the initial password or change the terminal password. This endpoint allows you to update the password for a terminal using retailer credentials and terminal information.\n\n**Password Requirements:**\n\n- New password must be different from current password\n    \n- Password must be at least 8 characters long\n    \n- Password must contain at least one digit and one character\n    \n\n**Request Parameters:**\n\n- `RetailerUserName` (required) - Retailer username for authentication\n    \n- `RetailerPassword` (required) - Retailer password for authentication\n    \n- `KidometMefic` (required) - Kidomet Mefic identifier\n    \n- `HPMefic` (required) - HP Mefic identifier\n    \n- `TerminalNumber` (required) - Terminal number to change password for\n    \n- `OldTerminalPassword` (required) - Current terminal password\n    \n- `TerminalPassword` (required) - New terminal password (must meet requirements)\n    \n- `TerminalUserName` (required) - Terminal username\n    \n\n**Response Fields:**\n\n- `TerminalNumber` - The terminal number that was updated\n    \n- `HasError` - Boolean indicating if the response contains errors (false = success)\n    \n- `Errors` - Object containing error details if HasError is true\n    - `Code` - Error code (e.g., 50114 for password equals old password)\n        \n    - `Message` - Descriptive error message\n        \n    - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"OldTerminalPassword\": \"OldPass123\",\n  \"TerminalPassword\": \"NewPassword123\",\n  \"TerminalUserName\": \"terminal_username\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/ChangePassword",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"ChangePassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50114,\n    \"Message\": \"New password is equals to old password.\",\n    \"Severity\": 2\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create BackOffice User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"OldTerminalPassword\": \"{{Password}}\",\n  \"TerminalPassword\": \"NewPassword123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\",\n  \"MobileNumber\": \"+972501234567\",\n  \"Email\": \"user@example.com\",\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"IsCollaborator\": false,\n  \"CollaborationId\": \"\",\n  \"IsActive\": true,\n  \"IsManager\": false,\n  \"IsViewOnly\": false,\n  \"AllowReports\": true,\n  \"AllowWebCheckout\": true,\n  \"AllowVirtualTerminal\": true,\n  \"AllowApplePay\": false,\n  \"AllowGooglePay\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/OnBoarding/API/CreateBackOfficeUser",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"OnBoarding",
+								"API",
+								"CreateBackOfficeUser"
+							]
+						},
+						"description": "This API is used to create a user for an existing terminal in the Payment Arena system. The API allows you to configure user permissions and access levels for various features including reports, WebCheckout, virtual terminal, and mobile payment methods.\n\n**Request Parameters:**\n- `RetailerUserName` (required) - Retailer username for authentication\n- `RetailerPassword` (required) - Retailer password for authentication\n- `KidometMefic` (required) - Kidomet Mefic identifier\n- `HPMefic` (required) - HP Mefic identifier\n- `TerminalNumber` (required) - Terminal number to create user for\n- `OldTerminalPassword` - Current terminal password\n- `TerminalPassword` (required) - Terminal password\n- `TerminalUserName` (required) - Terminal username\n- `BackOfficeUserName` (required) - Username for the new back office user\n- `MobileNumber` (required) - Mobile phone number\n- `Email` (required) - Email address\n- `FirstName` (required) - First name\n- `LastName` (required) - Last name\n- `IsCollaborator` (required) - Whether user is a collaborator\n- `CollaborationId` (required) - Collaboration identifier\n- `IsActive` (required) - Whether user account is active\n- `IsManager` (required) - Whether user has manager privileges\n- `IsViewOnly` (required) - Whether user has view-only access\n- `AllowReports` (required) - Allow access to reports\n- `AllowWebCheckout` (required) - Allow access to WebCheckout\n- `AllowVirtualTerminal` (required) - Allow access to virtual terminal\n- `AllowApplePay` (required) - Allow Apple Pay functionality\n- `AllowGooglePay` (required) - Allow Google Pay functionality\n\n**Response Fields:**\n- `TerminalNumber` - The terminal number\n- `HasError` - Boolean indicating if the response contains errors (false = success)\n- `Errors` - Object containing error details if HasError is true\n  - `Code` - Error code (e.g., 50222 for password change required)\n  - `Message` - Descriptive error message\n  - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"OldTerminalPassword\": \"OldPass123\",\n  \"TerminalPassword\": \"NewPassword123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\",\n  \"MobileNumber\": \"+972501234567\",\n  \"Email\": \"user@example.com\",\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"IsCollaborator\": false,\n  \"CollaborationId\": \"\",\n  \"IsActive\": true,\n  \"IsManager\": false,\n  \"IsViewOnly\": false,\n  \"AllowReports\": true,\n  \"AllowWebCheckout\": true,\n  \"AllowVirtualTerminal\": true,\n  \"AllowApplePay\": false,\n  \"AllowGooglePay\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/CreateBackOfficeUser",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"CreateBackOfficeUser"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50222,\n    \"Message\": \"User must change initial password\",\n    \"Severity\": 2\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Terminal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"TerminalPassword\": \"InitialPass123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"DepositType\": 3,\n  \"DepositTime\": \"14:00\",\n  \"BusinessName\": \"My Business Ltd\",\n  \"BusinessNumber\": \"123456789\",\n  \"AllowRefund\": true,\n  \"AllowTokenization\": true,\n  \"AllowSMS\": false,\n  \"SMSShortCode\": \"\",\n  \"Allow3DS\": true,\n  \"MerchantAmExID\": \"AMEX123456\",\n  \"MastercardMCC\": \"5411\",\n  \"ViseMCC\": \"5411\",\n  \"AmexMCC\": \"5411\",\n  \"DinersMCC\": \"5411\",\n  \"EnableRavMutav\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/Ash/RetManCustRestApi/OnBoarding/API/CreateTerminal",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"Ash",
+								"RetManCustRestApi",
+								"OnBoarding",
+								"API",
+								"CreateTerminal"
+							]
+						},
+						"description": "Only existing payment terminals can be added to the Payment Arena system. To define/add a new terminal, you must first add/open it in the Shva switch either using the web portal or API in the automated terminal opening service.\n\n**Prerequisites:**\n\n- For creating Terminal in the Shva Switch you can use RetailerEmvOpen API or RetailerManagementEMV web application\n    \n- After receiving a notification by email that the terminal is open, you can add it to the Arena using the CreateTerminal API\n    \n\n**Important Notes:**\n\n- In order to activate the terminal, the user must configure a permanent password using the ChangePassword API\n    \n- If the customer wants to specify the time for a scheduled settlement to SHVA (when the transaction records will be deposited), they must set the DepositType field to value 3. In this case, the DepositTime field is required (conditional field) and must be populated with the desired deposit time. For all other values of the DepositType field, the DepositTime field is not required.\n    \n\n**Request Parameters:**\n\n- `RetailerUserName` (required) - Retailer username for authentication\n    \n- `RetailerPassword` (required) - Retailer password for authentication\n    \n- `KidometMefic` (required) - Kidomet Mefic identifier\n    \n- `HPMefic` (required) - HP Mefic identifier\n    \n- `TerminalNumber` (required) - Terminal number (must be 7 digits)\n    \n- `TerminalPassword` (required) - Initial terminal password\n    \n- `TerminalUserName` (required) - Terminal username\n    \n- `DepositType` (required) - Deposit type (set to 3 for scheduled settlement)\n    \n- `DepositTime` (required) - Deposit time (required when DepositType = 3, format: HH:mm)\n    \n- `BusinessName` (required) - Business name\n    \n- `BusinessNumber` (required) - Business registration number\n    \n- `AllowRefund` (required) - Allow refund transactions\n    \n- `AllowTokenization` (required) - Allow card tokenization\n    \n- `AllowSMS` (required) - Allow SMS notifications\n    \n- `SMSShortCode` (required) - SMS short code\n    \n- `Allow3DS` (required) - Allow 3D Secure authentication\n    \n- `MerchantAmExID` (required) - American Express merchant ID\n    \n- `MastercardMCC` (required) - Mastercard Merchant Category Code\n    \n- `ViseMCC` (required) - Visa Merchant Category Code\n    \n- `AmexMCC` (required) - American Express Merchant Category Code\n    \n- `DinersMCC` (required) - Diners Club Merchant Category Code\n    \n- `EnableRavMutav` (required) - Enable Rav Mutav functionality\n    \n\n**Response Fields:**\n\n- `TerminalNumber` - The terminal number\n    \n- `HasError` - Boolean indicating if the response contains errors (false = success)\n    \n- `Errors` - Object containing error details if HasError is true\n    - `Code` - Error code (e.g., 50101 for incorrect terminal number format)\n        \n    - `Message` - Descriptive error message\n        \n    - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"TerminalPassword\": \"InitialPass123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"DepositType\": 3,\n  \"DepositTime\": \"14:00\",\n  \"BusinessName\": \"My Business Ltd\",\n  \"BusinessNumber\": \"123456789\",\n  \"AllowRefund\": true,\n  \"AllowTokenization\": true,\n  \"AllowSMS\": false,\n  \"SMSShortCode\": \"\",\n  \"Allow3DS\": true,\n  \"MerchantAmExID\": \"AMEX123456\",\n  \"MastercardMCC\": \"5411\",\n  \"ViseMCC\": \"5411\",\n  \"AmexMCC\": \"5411\",\n  \"DinersMCC\": \"5411\",\n  \"EnableRavMutav\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/CreateTerminal",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"CreateTerminal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50101,\n    \"Message\": \"TerminalNumber is not correct format, must be 7 digits\",\n    \"Severity\": 1\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete BackOffice User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"TerminalPassword\": \"{{Password}}\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/OnBoarding/API/DeleteBackOfficeUser",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"OnBoarding",
+								"API",
+								"DeleteBackOfficeUser"
+							]
+						},
+						"description": "API to delete BackOffice User from the Payment Arena system.\n\n**Request Parameters:**\n- `RetailerUserName` (required) - Retailer username for authentication\n- `RetailerPassword` (required) - Retailer password for authentication\n- `KidometMefic` (required) - Kidomet Mefic identifier\n- `HPMefic` (required) - HP Mefic identifier\n- `TerminalNumber` (required) - Terminal number\n- `TerminalPassword` (required) - Terminal password\n- `TerminalUserName` (required) - Terminal username\n- `BackOfficeUserName` (required) - Username of the back office user to delete\n\n**Response Fields:**\n- `TerminalNumber` - The terminal number\n- `HasError` - Boolean indicating if the response contains errors (false = success)\n- `Errors` - Object containing error details if HasError is true\n  - `Code` - Error code (e.g., 50107 for terminal not exists)\n  - `Message` - Descriptive error message\n  - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"TerminalPassword\": \"password123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/DeleteBackOfficeUser",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"DeleteBackOfficeUser"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50107,\n    \"Message\": \"Terminal number not exists.\",\n    \"Severity\": 2\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset BackOffice User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"TerminalPassword\": \"{{Password}}\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/OnBoarding/API/ResetBackOfficeUser",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"OnBoarding",
+								"API",
+								"ResetBackOfficeUser"
+							]
+						},
+						"description": "API to reset password of BackOffice User - the User has to receive mail with link.\n\n**Request Parameters:**\n- `RetailerUserName` (required) - Retailer username for authentication\n- `RetailerPassword` (required) - Retailer password for authentication\n- `KidometMefic` (required) - Kidomet Mefic identifier\n- `HPMefic` (required) - HP Mefic identifier\n- `TerminalNumber` (required) - Terminal number\n- `TerminalPassword` (required) - Terminal password\n- `TerminalUserName` (required) - Terminal username\n- `BackOfficeUserName` (required) - Username of the back office user to reset password\n\n**Response Fields:**\n- `TerminalNumber` - The terminal number\n- `HasError` - Boolean indicating if the response contains errors (false = success)\n- `Errors` - Object containing error details if HasError is true\n  - `Code` - Error code (e.g., 50107 for terminal not exists)\n  - `Message` - Descriptive error message\n  - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"TerminalPassword\": \"password123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/ResetBackOfficeUser",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"ResetBackOfficeUser"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50107,\n    \"Message\": \"Terminal number not exists.\",\n    \"Severity\": 2\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update BackOffice User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"OldTerminalPassword\": \"{{Password}}\",\n  \"TerminalPassword\": \"NewPassword123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\",\n  \"MobileNumber\": \"+972501234567\",\n  \"Email\": \"user@example.com\",\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"IsCollaborator\": false,\n  \"CollaborationId\": \"\",\n  \"IsActive\": true,\n  \"IsManager\": false,\n  \"IsViewOnly\": false,\n  \"AllowReports\": true,\n  \"AllowWebCheckout\": true,\n  \"AllowVirtualTerminal\": true,\n  \"AllowApplePay\": false,\n  \"AllowGooglePay\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/OnBoarding/API/UpdateBackOfficeUser",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"OnBoarding",
+								"API",
+								"UpdateBackOfficeUser"
+							]
+						},
+						"description": "This API is used to update the status and/or configuration of an existing user in the Web Portal.\n\n**Request Parameters:**\n- `RetailerUserName` (required) - Retailer username for authentication\n- `RetailerPassword` (required) - Retailer password for authentication\n- `KidometMefic` (required) - Kidomet Mefic identifier\n- `HPMefic` (required) - HP Mefic identifier\n- `TerminalNumber` (required) - Terminal number\n- `OldTerminalPassword` - Current terminal password\n- `TerminalPassword` (required) - Terminal password\n- `TerminalUserName` (required) - Terminal username\n- `BackOfficeUserName` (required) - Username of the back office user to update\n- `MobileNumber` (required) - Mobile phone number\n- `Email` (required) - Email address\n- `FirstName` (required) - First name\n- `LastName` (required) - Last name\n- `IsCollaborator` (required) - Whether user is a collaborator\n- `CollaborationId` (required) - Collaboration identifier\n- `IsActive` (required) - Whether user account is active\n- `IsManager` (required) - Whether user has manager privileges\n- `IsViewOnly` (required) - Whether user has view-only access\n- `AllowReports` (required) - Allow access to reports\n- `AllowWebCheckout` (required) - Allow access to WebCheckout\n- `AllowVirtualTerminal` (required) - Allow access to virtual terminal\n- `AllowApplePay` (required) - Allow Apple Pay functionality\n- `AllowGooglePay` (required) - Allow Google Pay functionality\n\n**Response Fields:**\n- `TerminalNumber` - The terminal number\n- `HasError` - Boolean indicating if the response contains errors (false = success)\n- `Errors` - Object containing error details if HasError is true\n  - `Code` - Error code (e.g., 50222 for password change required)\n  - `Message` - Descriptive error message\n  - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"OldTerminalPassword\": \"OldPass123\",\n  \"TerminalPassword\": \"NewPassword123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"BackOfficeUserName\": \"backoffice_user\",\n  \"MobileNumber\": \"+972501234567\",\n  \"Email\": \"user@example.com\",\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"IsCollaborator\": false,\n  \"CollaborationId\": \"\",\n  \"IsActive\": true,\n  \"IsManager\": false,\n  \"IsViewOnly\": false,\n  \"AllowReports\": true,\n  \"AllowWebCheckout\": true,\n  \"AllowVirtualTerminal\": true,\n  \"AllowApplePay\": false,\n  \"AllowGooglePay\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/UpdateBackOfficeUser",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"UpdateBackOfficeUser"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50222,\n    \"Message\": \"User must change initial password\",\n    \"Severity\": 2\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Terminal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"{{TerminalNumber}}\",\n  \"TerminalPassword\": \"{{Password}}\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"DepositType\": 3,\n  \"DepositTime\": \"14:00\",\n  \"BusinessName\": \"My Business Ltd\",\n  \"BusinessNumber\": \"123456789\",\n  \"AllowRefund\": true,\n  \"AllowTokenization\": true,\n  \"AllowSMS\": false,\n  \"SMSShortCode\": \"\",\n  \"Allow3DS\": true,\n  \"MerchantAmExID\": \"AMEX123456\",\n  \"MastercardMCC\": \"5411\",\n  \"ViseMCC\": \"5411\",\n  \"AmexMCC\": \"5411\",\n  \"DinersMCC\": \"5411\",\n  \"EnableRavMutav\": false,\n  \"IsActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ArenaRetailerManagementURL}}/OnBoarding/API/UpdateTerminal",
+							"host": [
+								"{{ArenaRetailerManagementURL}}"
+							],
+							"path": [
+								"OnBoarding",
+								"API",
+								"UpdateTerminal"
+							]
+						},
+						"description": "This API is used to update the status or configuration of an existing terminal in the Payment Arena system.\n\n**Request Parameters:**\n- `RetailerUserName` (required) - Retailer username for authentication\n- `RetailerPassword` (required) - Retailer password for authentication\n- `KidometMefic` (required) - Kidomet Mefic identifier\n- `HPMefic` (required) - HP Mefic identifier\n- `TerminalNumber` (required) - Terminal number (must be 7 digits)\n- `TerminalPassword` (required) - Terminal password\n- `TerminalUserName` (required) - Terminal username\n- `DepositType` (required) - Deposit type (set to 3 for scheduled settlement)\n- `DepositTime` (required) - Deposit time (required when DepositType = 3, format: HH:mm)\n- `BusinessName` (required) - Business name\n- `BusinessNumber` (required) - Business registration number\n- `AllowRefund` (required) - Allow refund transactions\n- `AllowTokenization` (required) - Allow card tokenization\n- `AllowSMS` (required) - Allow SMS notifications\n- `SMSShortCode` (required) - SMS short code\n- `Allow3DS` (required) - Allow 3D Secure authentication\n- `MerchantAmExID` (required) - American Express merchant ID\n- `MastercardMCC` (required) - Mastercard Merchant Category Code\n- `ViseMCC` (required) - Visa Merchant Category Code\n- `AmexMCC` (required) - American Express Merchant Category Code\n- `DinersMCC` (required) - Diners Club Merchant Category Code\n- `EnableRavMutav` (required) - Enable Rav Mutav functionality\n- `IsActive` (required) - Whether terminal is active\n\n**Response Fields:**\n- `TerminalNumber` - The terminal number\n- `HasError` - Boolean indicating if the response contains errors (false = success)\n- `Errors` - Object containing error details if HasError is true\n  - `Code` - Error code (e.g., 50101 for incorrect terminal number format)\n  - `Message` - Descriptive error message\n  - `Severity` - Error severity level"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RetailerUserName\": \"retailer_username\",\n  \"RetailerPassword\": \"retailer_password\",\n  \"KidometMefic\": \"kidometMefic_value\",\n  \"HPMefic\": \"hpMefic_value\",\n  \"TerminalNumber\": \"080000014\",\n  \"TerminalPassword\": \"password123\",\n  \"TerminalUserName\": \"terminal_username\",\n  \"DepositType\": 3,\n  \"DepositTime\": \"14:00\",\n  \"BusinessName\": \"My Business Ltd\",\n  \"BusinessNumber\": \"123456789\",\n  \"AllowRefund\": true,\n  \"AllowTokenization\": true,\n  \"AllowSMS\": false,\n  \"SMSShortCode\": \"\",\n  \"Allow3DS\": true,\n  \"MerchantAmExID\": \"AMEX123456\",\n  \"MastercardMCC\": \"5411\",\n  \"ViseMCC\": \"5411\",\n  \"AmexMCC\": \"5411\",\n  \"DinersMCC\": \"5411\",\n  \"EnableRavMutav\": false,\n  \"IsActive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ArenaPrevBaseURL}}/OnBoarding/API/UpdateTerminal",
+									"host": [
+										"{{ArenaPrevBaseURL}}"
+									],
+									"path": [
+										"OnBoarding",
+										"API",
+										"UpdateTerminal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"TerminalNumber\": \"080000014\",\n  \"HasError\": true,\n  \"Errors\": {\n    \"Code\": 50101,\n    \"Message\": \"TerminalNumber is not correct format, must be 7 digits\",\n    \"Severity\": 1\n  }\n}"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for terminal onboarding operations. These APIs allow you to manage terminal configuration including password changes and initial setup.  \nThis is the full reference for the Shva Retailer Management APIs:\n\n**Notes**\n\n• https://www.shva-online.co.il/Ash/RetManCustRestApi URL for users with static IP opened in Shva firewall\n\n• https://online-shva.co.il/Ash/RetManCustRestApi URL for users with Shva clients certificate"
+		}
+	]
+}
