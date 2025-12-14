@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
+import { AppRouter } from './router/AppRouter';
 
 // Global styles with RTL support
 const GlobalStyle = createGlobalStyle`
@@ -57,13 +58,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const AppContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
 function App() {
   useEffect(() => {
     // Ensure HTML has correct direction
@@ -74,17 +68,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AppContainer>
-        {/* Application pages will be here */}
-        <div style={{ padding: '2rem', textAlign: 'center' }}>
-          <h1 style={{ color: theme.colors.primary.main }}>
-            Shva Arena - Retail Manager
-          </h1>
-          <p style={{ color: theme.colors.text.secondary, marginTop: '1rem' }}>
-            Project configured. Design system ready to use.
-          </p>
-        </div>
-      </AppContainer>
+      <AppRouter />
     </ThemeProvider>
   );
 }
